@@ -30,7 +30,7 @@
     min-height: 100vh;
     padding: 28px 0 90px;
     overflow: hidden;
-    background: url("images/hero.jpg") right center / cover no-repeat;
+    background: url("images/casino-homepage.jpg") right center / cover no-repeat;
   }
   
   .hero::before {
