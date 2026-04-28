@@ -570,3 +570,31 @@
   font-size: 18px;
   margin-bottom: 28px;
 }
+.thankyou-hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.78)),
+    url("images/bedankt-croupiers.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.thankyou-content {
+  max-width: 720px;
+  color: #fff;
+}
+
+.thankyou-content h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  margin-bottom: 18px;
+}
+
+.thankyou-content p {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: #e6e6e6;
+  margin-bottom: 32px;
+}
