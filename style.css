@@ -149,9 +149,105 @@
     background: rgba(255, 255, 255, 0.02);
   }
   
-  .button-secondary:hover {
-    border-color: #d4af37;
-  }
+.button-secondary:hover {
+  border-color: #d4af37;
+}
+
+.product-hero {
+  min-height: auto;
+}
+
+.product-hero-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+  gap: 44px;
+  align-items: center;
+  padding-top: 110px;
+}
+
+.product-hero-content {
+  padding-top: 0;
+  max-width: none;
+}
+
+.product-hero-image {
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+  background: #111217;
+}
+
+.product-hero-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.product-trust,
+.contact-trust {
+  color: #c6b895;
+  font-size: 15px;
+}
+
+.product-copy {
+  max-width: 860px;
+}
+
+.product-copy .section-text + .section-text {
+  margin-top: 18px;
+}
+
+.product-card-grid {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.product-three-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.product-section-action {
+  margin-top: 28px;
+}
+
+.step-number {
+  display: inline-block;
+  color: #d4af37;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.faq-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 34px;
+}
+
+.faq-item {
+  background: #121318;
+  border: 1px solid rgba(212, 175, 55, 0.14);
+  border-radius: 18px;
+  padding: 24px 26px;
+}
+
+.faq-item h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.faq-item p {
+  color: #d3c7b2;
+}
+
+.product-cta {
+  max-width: 840px;
+}
   
   .hero-highlights {
     display: flex;
@@ -257,12 +353,16 @@
     margin-top: 34px;
   }
   
-  .card {
+.card {
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border: 1px solid rgba(212, 175, 55, 0.16);
     border-radius: 18px;
     padding: 28px;
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card-link {
+    display: block;
   }
   
   .card:hover,
@@ -420,6 +520,16 @@
     .cards {
       grid-template-columns: 1fr 1fr;
     }
+
+    .product-hero-grid {
+      grid-template-columns: 1fr;
+      padding-top: 90px;
+    }
+
+    .product-card-grid,
+    .product-three-grid {
+      grid-template-columns: 1fr 1fr;
+    }
   }
   
   @media (max-width: 760px) {
@@ -447,8 +557,19 @@
     .split-grid,
     .extras-grid,
     .contact-grid,
-    .cards {
+    .cards,
+    .product-card-grid,
+    .product-three-grid {
       grid-template-columns: 1fr;
+    }
+
+    .product-hero-grid {
+      gap: 30px;
+      padding-top: 75px;
+    }
+
+    .product-hero-image img {
+      aspect-ratio: 16 / 11;
     }
   
     .section {
@@ -538,38 +659,6 @@
 #mobile-menu.open {
   display: flex;
 }
-.thankyou-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 40px 20px;
-  background:
-    linear-gradient(rgba(6, 7, 10, 0.78), rgba(6, 7, 10, 0.9)),
-    url("images/hero.jpg") center center / cover no-repeat;
-}
-
-.thankyou-card {
-  max-width: 680px;
-  background: rgba(10, 10, 13, 0.88);
-  border: 1px solid rgba(212, 175, 55, 0.22);
-  border-radius: 22px;
-  padding: 42px;
-  text-align: center;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
-}
-
-.thankyou-card h1 {
-  font-size: clamp(34px, 5vw, 56px);
-  line-height: 1.1;
-  margin-bottom: 18px;
-}
-
-.thankyou-card p {
-  color: #d2c6b1;
-  font-size: 18px;
-  margin-bottom: 28px;
-}
 .thankyou-hero {
   min-height: 100vh;
   background:
@@ -597,4 +686,49 @@
   line-height: 1.7;
   color: #e6e6e6;
   margin-bottom: 32px;
+}
+
+.thankyou-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.thankyou-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 210px;
+  padding: 15px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.thankyou-button:hover {
+  transform: translateY(-2px);
+}
+
+.thankyou-button-primary {
+  background: #d4af37;
+  color: #111;
+}
+
+.thankyou-button-secondary {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  color: #f4ede1;
+}
+
+.thankyou-button-secondary:hover {
+  border-color: #d4af37;
+}
+
+@media (max-width: 520px) {
+  .thankyou-button {
+    width: 100%;
+    min-width: 0;
+  }
 }
