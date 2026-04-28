@@ -538,3 +538,35 @@
 #mobile-menu.open {
   display: flex;
 }
+.thankyou-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background:
+    linear-gradient(rgba(6, 7, 10, 0.78), rgba(6, 7, 10, 0.9)),
+    url("images/hero.jpg") center center / cover no-repeat;
+}
+
+.thankyou-card {
+  max-width: 680px;
+  background: rgba(10, 10, 13, 0.88);
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  border-radius: 22px;
+  padding: 42px;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+}
+
+.thankyou-card h1 {
+  font-size: clamp(34px, 5vw, 56px);
+  line-height: 1.1;
+  margin-bottom: 18px;
+}
+
+.thankyou-card p {
+  color: #d2c6b1;
+  font-size: 18px;
+  margin-bottom: 28px;
+}
