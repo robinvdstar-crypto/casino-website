@@ -32,3 +32,28 @@ mobileMenu.querySelectorAll("a").forEach((link) => {
     hamburger.classList.remove("open");
   });
 });
+
+const tableItems = document.querySelectorAll(".table-item");
+
+tableItems.forEach((item) => {
+  const toggle = item.querySelector(".table-toggle");
+
+  if (!toggle) return;
+
+  toggle.addEventListener("click", () => {
+    const isOpen = item.classList.contains("open");
+
+    tableItems.forEach((otherItem) => {
+      otherItem.classList.remove("open");
+      const otherToggle = otherItem.querySelector(".table-toggle");
+      if (otherToggle) {
+        otherToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    if (!isOpen) {
+      item.classList.add("open");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+});
