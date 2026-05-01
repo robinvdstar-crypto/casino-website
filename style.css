@@ -76,6 +76,20 @@
     font-size: 14px;
     color: #c6b895;
   }
+
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .brand-logo img {
+    display: block;
+    height: 72px;
+    width: auto;
+    max-width: 280px;
+    object-fit: contain;
+  }
   
   .nav-links {
     display: flex;
@@ -560,6 +574,28 @@
     gap: 20px;
     align-items: center;
   }
+
+  .footer-brand {
+    display: grid;
+    gap: 8px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-logo img {
+    display: block;
+    height: 48px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+  }
+
+  .footer-tagline {
+    color: #c6b895;
+  }
   
   .footer-right {
     color: #bcae95;
@@ -607,6 +643,11 @@
     .hero-text {
       font-size: 18px;
     }
+
+    .brand-logo img {
+      height: 52px;
+      max-width: 220px;
+    }
   
     .intro-grid,
     .option-grid,
@@ -639,6 +680,11 @@
   
     .footer-right {
       text-align: left;
+    }
+
+    .footer-logo img {
+      height: 42px;
+      max-width: 190px;
     }
 
     .gallery-grid {
