@@ -57,3 +57,29 @@ tableItems.forEach((item) => {
     }
   });
 });
+
+const quoteButtons = document.querySelectorAll("[data-table]");
+const contactSection = document.getElementById("contact");
+const selectionFeedback = document.querySelector(".selection-feedback");
+
+quoteButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.stopPropagation();
+
+    const tableName = button.getAttribute("data-table");
+    const checkbox = Array.from(document.querySelectorAll('input[name="tables[]"]'))
+      .find((input) => input.value === tableName);
+
+    if (checkbox) {
+      checkbox.checked = true;
+    }
+
+    if (selectionFeedback && tableName) {
+      selectionFeedback.textContent = `${tableName} toegevoegd aan je offerteaanvraag`;
+    }
+
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+});
