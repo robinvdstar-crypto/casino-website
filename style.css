@@ -965,23 +965,24 @@
 }
 
 .table-price {
-  min-width: 118px;
+  min-width: 210px;
   text-align: right;
 }
 
-.table-price span {
-  display: block;
-  color: #bdae8d;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 1.4px;
-}
-
-.table-price strong {
-  display: block;
+.table-price .price {
+  margin: 0;
   color: #d4af37;
   font-size: 28px;
+  font-weight: 800;
   line-height: 1.1;
+}
+
+.table-price .price-note {
+  margin: 7px 0 0 auto;
+  max-width: 210px;
+  color: #bdae8d;
+  font-size: 12px;
+  line-height: 1.35;
 }
 
 .table-content {
@@ -1153,11 +1154,16 @@
   }
 
   .table-price {
-    min-width: 82px;
+    min-width: 170px;
   }
 
-  .table-price strong {
+  .table-price .price {
     font-size: 22px;
+  }
+
+  .table-price .price-note {
+    max-width: 170px;
+    font-size: 11px;
   }
 
   .table-content {
@@ -1181,6 +1187,11 @@
   .table-price {
     text-align: left;
     padding-left: 106px;
+  }
+
+  .table-price .price-note {
+    margin-left: 0;
+    max-width: 230px;
   }
 
   .table-content {
