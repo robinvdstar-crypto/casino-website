@@ -1093,7 +1093,8 @@
   font-weight: 700;
 }
 
-.upsell-card {
+.upsell-card,
+.addon-card {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -1104,13 +1105,20 @@
   background: rgba(212, 175, 55, 0.06);
 }
 
-.upsell-card h3 {
+.addon-card {
+  max-width: 760px;
+  margin-top: 18px;
+}
+
+.upsell-card h3,
+.addon-card h3 {
   margin-bottom: 6px;
   color: #f4ede1;
   font-size: 18px;
 }
 
-.upsell-card p {
+.upsell-card p,
+.addon-card p {
   color: #cfc3ae;
   font-size: 14px;
 }
