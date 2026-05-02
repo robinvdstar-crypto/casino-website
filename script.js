@@ -21,17 +21,19 @@ window.addEventListener("scroll", setActiveNav);
 const hamburger = document.getElementById("hamburger");
 const mobileMenu = document.getElementById("mobile-menu");
 
-hamburger.addEventListener("click", () => {
-  mobileMenu.classList.toggle("open");
-  hamburger.classList.toggle("open");
-});
-
-mobileMenu.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    mobileMenu.classList.remove("open");
-    hamburger.classList.remove("open");
+if (hamburger && mobileMenu) {
+  hamburger.addEventListener("click", () => {
+    mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open");
   });
-});
+
+  mobileMenu.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+    });
+  });
+}
 
 const tableItems = document.querySelectorAll(".table-item");
 
@@ -83,3 +85,26 @@ quoteButtons.forEach((button) => {
     }
   });
 });
+
+const contactForm = document.querySelector(".contact-form");
+
+if (contactForm) {
+  contactForm.addEventListener("submit", () => {
+    const selectedTables = Array.from(contactForm.querySelectorAll('input[name="tables[]"]:checked'))
+      .map((input) => input.value)
+      .join(", ");
+    const selectedExtras = Array.from(contactForm.querySelectorAll('input[name="extras[]"]:checked'))
+      .map((input) => input.value)
+      .join(", ");
+    const selectedTablesField = contactForm.querySelector('input[name="selected_tables"]');
+    const selectedExtrasField = contactForm.querySelector('input[name="selected_extras"]');
+
+    if (selectedTablesField) {
+      selectedTablesField.value = selectedTables;
+    }
+
+    if (selectedExtrasField) {
+      selectedExtrasField.value = selectedExtras;
+    }
+  });
+}
