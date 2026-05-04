@@ -474,6 +474,10 @@
   .contact-section {
     background: linear-gradient(180deg, #101117 0%, #090a0d 100%);
   }
+
+  #contact {
+    scroll-margin-top: 100px;
+  }
   
   .contact-grid {
     display: grid;
@@ -660,6 +664,10 @@
   }
   
   @media (max-width: 760px) {
+    #contact {
+      scroll-margin-top: 130px;
+    }
+
     .nav {
       flex-direction: row;
       align-items: center;
