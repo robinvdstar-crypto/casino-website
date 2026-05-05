@@ -67,24 +67,46 @@ tableItems.forEach((item) => {
   });
 });
 
-const quoteButtons = document.querySelectorAll("[data-table]");
+const quoteButtons = document.querySelectorAll("[data-option]");
 const contactSection = document.getElementById("contact");
 const selectionFeedback = document.querySelector(".selection-feedback");
+const tableOptions = [
+  "Roulette tafel",
+  "Blackjack tafel",
+  "Craps tafel",
+  "Pokertafel",
+  "Rad van Fortuin",
+  "Golden Ten",
+  "Paardenrennen",
+  "Caribbean Stud",
+  "Gokkasten",
+];
 
 quoteButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
     event.stopPropagation();
 
-    const tableName = button.getAttribute("data-table");
-    const checkbox = Array.from(document.querySelectorAll('input[name="tables[]"]'))
-      .find((input) => input.value === tableName);
+    const optionName = button.getAttribute("data-option");
+    const checkbox = Array.from(document.querySelectorAll('input[name="aanvraag_opties[]"]'))
+      .find((input) => input.value === optionName);
 
     if (checkbox) {
       checkbox.checked = true;
     }
 
-    if (selectionFeedback && tableName) {
-      selectionFeedback.textContent = `${tableName} toegevoegd aan je offerteaanvraag`;
+    const tableSelect = document.querySelector('select[name="type_tafels"]');
+    const extrasSelect = document.querySelector('select[name="overige_opties"]');
+
+    if (tableSelect && tableOptions.includes(optionName)) {
+      tableSelect.value = optionName;
+    }
+
+    if (extrasSelect && !tableOptions.includes(optionName)) {
+      extrasSelect.value = optionName;
+    }
+
+    if (selectionFeedback && optionName) {
+      selectionFeedback.textContent = `${optionName} toegevoegd aan je aanvraag`;
     }
 
     if (contactSection) {
@@ -97,7 +119,7 @@ const contactForm = document.querySelector(".contact-form");
 
 if (contactForm) {
   contactForm.addEventListener("submit", () => {
-    const selectedTables = Array.from(contactForm.querySelectorAll('input[name="tables[]"]:checked'))
+    const selectedOptions = Array.from(contactForm.querySelectorAll('input[name="aanvraag_opties[]"]:checked'))
       .map((input) => input.value)
       .join(", ");
     const selectedExtras = Array.from(contactForm.querySelectorAll('input[name="extras[]"]:checked'))
@@ -107,7 +129,7 @@ if (contactForm) {
     const selectedExtrasField = contactForm.querySelector('input[name="selected_extras"]');
 
     if (selectedTablesField) {
-      selectedTablesField.value = selectedTables;
+      selectedTablesField.value = selectedOptions;
     }
 
     if (selectedExtrasField) {
