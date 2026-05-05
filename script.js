@@ -33,6 +33,13 @@ if (hamburger && mobileMenu) {
       hamburger.classList.remove("open");
     });
   });
+
+  mobileMenu.addEventListener("click", (event) => {
+    if (event.target === mobileMenu) {
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+    }
+  });
 }
 
 const tableItems = document.querySelectorAll(".table-item");
