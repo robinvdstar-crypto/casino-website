@@ -1072,6 +1072,11 @@
   transform: translateY(-2px);
 }
 
+.mini-cta.is-added {
+  background: #f0d575;
+  color: #0f0f12;
+}
+
 .option-card .mini-cta,
 .extra-card .mini-cta {
   margin-top: 0;
@@ -1143,6 +1148,27 @@
   color: #d4af37;
   font-size: 14px;
   font-weight: 700;
+}
+
+.selected-options-field {
+  display: grid;
+  gap: 8px;
+}
+
+.selected-options-field span {
+  color: #d4af37;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.selected-options-field textarea {
+  min-height: 82px;
+  color: #f4ede1;
+  background: rgba(212, 175, 55, 0.055);
+  border-color: rgba(212, 175, 55, 0.24);
+  resize: vertical;
 }
 
 .upsell-card,
@@ -1219,6 +1245,46 @@
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42), 0 0 0 3px rgba(212, 175, 55, 0.16);
 }
 
+.request-summary-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  z-index: 910;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(620px, calc(100% - 32px));
+  padding: 12px 14px 12px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-radius: 16px;
+  background: rgba(8, 8, 10, 0.94);
+  color: #efe5d4;
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.38);
+  transform: translateX(-50%);
+}
+
+.request-summary-bar[hidden] {
+  display: none;
+}
+
+.request-summary-bar span {
+  flex: 1;
+  font-size: 15px;
+}
+
+.request-summary-bar strong {
+  color: #d4af37;
+}
+
+.request-summary-bar a {
+  flex: 0 0 auto;
+  border-radius: 10px;
+  background: #d4af37;
+  color: #111;
+  font-weight: 800;
+  padding: 10px 14px;
+}
+
 @media (max-width: 760px) {
   .whatsapp-floating {
     right: 14px;
@@ -1286,6 +1352,30 @@
 
   .upsell-card {
     flex-direction: column;
+  }
+
+  .request-summary-bar {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    transform: none;
+  }
+
+  .request-summary-bar span {
+    font-size: 14px;
+  }
+
+  .request-summary-bar a {
+    padding: 11px 12px;
+  }
+
+  body.has-request-selection .sticky-mobile-cta {
+    display: none;
+  }
+
+  body.has-request-selection .whatsapp-floating {
+    bottom: 88px;
   }
 }
 

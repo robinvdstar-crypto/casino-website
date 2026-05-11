@@ -40,6 +40,16 @@ if (hamburger && mobileMenu) {
       hamburger.classList.remove("open");
     }
   });
+
+  document.addEventListener("click", (event) => {
+    const clickInsideMenu = mobileMenu.contains(event.target);
+    const clickOnHamburger = hamburger.contains(event.target);
+
+    if (!clickInsideMenu && !clickOnHamburger) {
+      mobileMenu.classList.remove("open");
+      hamburger.classList.remove("open");
+    }
+  });
 }
 
 const tableItems = document.querySelectorAll(".table-item");
@@ -70,6 +80,8 @@ tableItems.forEach((item) => {
 const quoteButtons = document.querySelectorAll("[data-option]");
 const contactSection = document.getElementById("contact");
 const selectionFeedback = document.querySelector(".selection-feedback");
+const requestSummaryBar = document.querySelector(".request-summary-bar");
+const selectedOptionsTextarea = document.querySelector('textarea[name="gekozen_tafels_en_opties"]');
 const tableOptions = [
   "Roulette tafel",
   "Blackjack tafel",
@@ -82,32 +94,85 @@ const tableOptions = [
   "Gokkasten",
 ];
 
+function getCheckedValues(selector) {
+  return Array.from(document.querySelectorAll(selector + ":checked")).map((input) => input.value);
+}
+
+function findOptionInput(optionName) {
+  return Array.from(document.querySelectorAll('input[name="aanvraag_opties[]"], input[name="extras[]"]'))
+    .find((input) => input.value === optionName);
+}
+
+function updateRequestSelection() {
+  const selectedOptions = getCheckedValues('input[name="aanvraag_opties[]"]');
+  const selectedExtras = getCheckedValues('input[name="extras[]"]');
+  const allSelections = [...new Set([...selectedOptions, ...selectedExtras])];
+  const selectionText = allSelections.length ? allSelections.join(", ") : "";
+  const selectedTablesField = document.querySelector('input[name="selected_tables"]');
+  const selectedExtrasField = document.querySelector('input[name="selected_extras"]');
+  const selectedRequestField = document.querySelector('input[name="selected_request"]');
+
+  if (selectedTablesField) selectedTablesField.value = selectedOptions.join(", ");
+  if (selectedExtrasField) selectedExtrasField.value = selectedExtras.join(", ");
+  if (selectedRequestField) selectedRequestField.value = selectionText;
+
+  if (selectedOptionsTextarea) {
+    selectedOptionsTextarea.value = selectionText;
+  }
+
+  if (requestSummaryBar) {
+    const count = allSelections.length;
+    requestSummaryBar.hidden = count === 0;
+    document.body.classList.toggle("has-request-selection", count > 0);
+
+    const label = requestSummaryBar.querySelector("strong");
+    if (label) {
+      label.textContent = `${count} ${count === 1 ? "optie" : "opties"}`;
+    }
+  }
+}
+
+function selectRequestOption(optionName) {
+  const checkbox = findOptionInput(optionName);
+
+  if (checkbox) {
+    checkbox.checked = true;
+  }
+
+  const tableSelect = document.querySelector('select[name="type_tafels"]');
+  const extrasSelect = document.querySelector('select[name="overige_opties"]');
+
+  if (tableSelect && tableOptions.includes(optionName)) {
+    tableSelect.value = optionName;
+  }
+
+  if (extrasSelect && !tableOptions.includes(optionName)) {
+    extrasSelect.value = optionName;
+  }
+
+  updateRequestSelection();
+}
+
 quoteButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
     event.stopPropagation();
 
     const optionName = button.getAttribute("data-option");
-    const checkbox = Array.from(document.querySelectorAll('input[name="aanvraag_opties[]"]'))
-      .find((input) => input.value === optionName);
-
-    if (checkbox) {
-      checkbox.checked = true;
-    }
-
-    const tableSelect = document.querySelector('select[name="type_tafels"]');
-    const extrasSelect = document.querySelector('select[name="overige_opties"]');
-
-    if (tableSelect && tableOptions.includes(optionName)) {
-      tableSelect.value = optionName;
-    }
-
-    if (extrasSelect && !tableOptions.includes(optionName)) {
-      extrasSelect.value = optionName;
-    }
+    selectRequestOption(optionName);
 
     if (selectionFeedback && optionName) {
       selectionFeedback.textContent = `${optionName} toegevoegd aan je aanvraag`;
     }
+
+    const originalText = button.dataset.originalText || button.textContent;
+    button.dataset.originalText = originalText;
+    button.textContent = "Toegevoegd";
+    button.classList.add("is-added");
+
+    window.setTimeout(() => {
+      button.textContent = originalText;
+      button.classList.remove("is-added");
+    }, 1600);
 
     if (contactSection) {
       contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -118,22 +183,25 @@ quoteButtons.forEach((button) => {
 const contactForm = document.querySelector(".contact-form");
 
 if (contactForm) {
-  contactForm.addEventListener("submit", () => {
-    const selectedOptions = Array.from(contactForm.querySelectorAll('input[name="aanvraag_opties[]"]:checked'))
-      .map((input) => input.value)
-      .join(", ");
-    const selectedExtras = Array.from(contactForm.querySelectorAll('input[name="extras[]"]:checked'))
-      .map((input) => input.value)
-      .join(", ");
-    const selectedTablesField = contactForm.querySelector('input[name="selected_tables"]');
-    const selectedExtrasField = contactForm.querySelector('input[name="selected_extras"]');
+  contactForm
+    .querySelectorAll('input[name="aanvraag_opties[]"], input[name="extras[]"]')
+    .forEach((input) => {
+      input.addEventListener("change", updateRequestSelection);
+    });
 
-    if (selectedTablesField) {
-      selectedTablesField.value = selectedOptions;
-    }
-
-    if (selectedExtrasField) {
-      selectedExtrasField.value = selectedExtras;
-    }
+  contactForm.querySelectorAll('select[name="type_tafels"], select[name="overige_opties"]').forEach((select) => {
+    select.addEventListener("change", () => {
+      if (select.value) {
+        selectRequestOption(select.value);
+      } else {
+        updateRequestSelection();
+      }
+    });
   });
+
+  contactForm.addEventListener("submit", () => {
+    updateRequestSelection();
+  });
+
+  updateRequestSelection();
 }
