@@ -630,7 +630,34 @@
           <span>Datum evenement</span>
           <input type="date" name="event_date" aria-label="Datum evenement" />
         </label>
-        <input type="text" name="location" placeholder="Locatie van het event" />
+        <div class="form-field address-field">
+          <label for="event-address">Postcode + huisnummer van het evenement</label>
+          <input
+            id="event-address"
+            type="text"
+            name="location"
+            placeholder="Bijv. 2182NM 24"
+            autocomplete="off"
+            aria-autocomplete="list"
+            aria-expanded="false"
+            aria-controls="address-suggestions"
+          />
+          <div id="address-suggestions" class="address-suggestions" role="listbox" hidden></div>
+          <button type="button" class="address-manual-toggle">Adres handmatig invullen</button>
+        </div>
+
+        <input type="hidden" name="Volledig adres evenement" value="">
+        <input type="hidden" name="Postcode evenement" value="">
+        <input type="hidden" name="Huisnummer evenement" value="">
+        <input type="hidden" name="Straat evenement" value="">
+        <input type="hidden" name="Plaats evenement" value="">
+
+        <div class="manual-address-fields" hidden>
+          <input type="text" data-address-field="street" placeholder="Straat" />
+          <input type="text" data-address-field="houseNumber" placeholder="Huisnummer" />
+          <input type="text" data-address-field="postcode" placeholder="Postcode" />
+          <input type="text" data-address-field="city" placeholder="Plaats" />
+        </div>
         <input type="number" name="guests" placeholder="Aantal gasten" min="1" />
         <select name="event_type">
           <option value="">Type event</option>

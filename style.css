@@ -538,7 +538,8 @@
     gap: 8px;
   }
 
-  .form-field span {
+  .form-field span,
+  .form-field label {
     color: #d4af37;
     font-size: 13px;
     font-weight: 800;
@@ -548,6 +549,84 @@
 
   .contact-form input[type="date"] {
     color-scheme: dark;
+  }
+
+  .address-field {
+    position: relative;
+  }
+
+  .address-suggestions {
+    position: absolute;
+    top: calc(100% - 2px);
+    left: 0;
+    right: 0;
+    z-index: 30;
+    display: grid;
+    gap: 6px;
+    max-height: 260px;
+    overflow-y: auto;
+    padding: 8px;
+    border: 1px solid rgba(212, 175, 55, 0.30);
+    border-radius: 12px;
+    background: #111219;
+    box-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+  }
+
+  .address-suggestions[hidden] {
+    display: none;
+  }
+
+  .address-suggestion,
+  .address-suggestion-status {
+    width: 100%;
+    padding: 12px 13px;
+    border: 1px solid rgba(212, 175, 55, 0.10);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #efe5d4;
+    font-size: 15px;
+    text-align: left;
+  }
+
+  .address-suggestion {
+    cursor: pointer;
+  }
+
+  .address-suggestion:hover,
+  .address-suggestion:focus-visible {
+    border-color: rgba(212, 175, 55, 0.58);
+    background: rgba(212, 175, 55, 0.10);
+  }
+
+  .address-suggestion-status {
+    color: #cfc3ae;
+  }
+
+  .address-manual-toggle {
+    justify-self: start;
+    width: auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    color: #d4af37;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .manual-address-fields {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid rgba(212, 175, 55, 0.16);
+    border-radius: 16px;
+    background: rgba(212, 175, 55, 0.045);
+  }
+
+  .manual-address-fields[hidden] {
+    display: none;
   }
 
   .form-dropdowns {
@@ -1397,6 +1476,10 @@
 }
 
 @media (max-width: 560px) {
+  .manual-address-fields {
+    grid-template-columns: 1fr;
+  }
+
   .table-toggle {
     flex-direction: column;
   }

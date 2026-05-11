@@ -153,6 +153,194 @@ function selectRequestOption(optionName) {
   updateRequestSelection();
 }
 
+function getAddressField(form, name) {
+  return form.elements.namedItem(name);
+}
+
+function setAddressHiddenFields(form, address) {
+  const fields = {
+    "Volledig adres evenement": address.fullAddress || "",
+    "Postcode evenement": address.postcode || "",
+    "Huisnummer evenement": address.houseNumber || "",
+    "Straat evenement": address.street || "",
+    "Plaats evenement": address.city || "",
+  };
+
+  Object.entries(fields).forEach(([name, value]) => {
+    const field = getAddressField(form, name);
+    if (field) {
+      field.value = value;
+    }
+  });
+}
+
+function normalizeAddressSuggestion(doc) {
+  const houseNumber = [doc.huisnummer, doc.huisletter, doc.huisnummertoevoeging]
+    .filter(Boolean)
+    .join("");
+
+  return {
+    fullAddress: doc.weergavenaam || "",
+    street: doc.straatnaam || "",
+    city: doc.woonplaatsnaam || "",
+    postcode: doc.postcode || "",
+    houseNumber,
+  };
+}
+
+async function fetchAddressSuggestions(query, signal) {
+  const url = new URL("https://api.pdok.nl/bzk/locatieserver/search/v3_1/suggest");
+  url.searchParams.set("q", query);
+  url.searchParams.set("fq", "type:adres");
+  url.searchParams.set(
+    "fl",
+    "weergavenaam,straatnaam,woonplaatsnaam,postcode,huisnummer,huisletter,huisnummertoevoeging,adresseerbaarobject_id"
+  );
+  url.searchParams.set("rows", "5");
+
+  const response = await fetch(url, { signal });
+  if (!response.ok) {
+    throw new Error("Adres zoeken is tijdelijk niet beschikbaar");
+  }
+
+  const data = await response.json();
+  return (data.response?.docs || []).slice(0, 5).map(normalizeAddressSuggestion);
+}
+
+function renderAddressSuggestions(container, suggestions, onSelect) {
+  container.innerHTML = "";
+
+  if (!suggestions.length) {
+    const status = document.createElement("div");
+    status.className = "address-suggestion-status";
+    status.textContent = "Geen adres gevonden, vul handmatig in";
+    container.appendChild(status);
+    container.hidden = false;
+    return;
+  }
+
+  suggestions.forEach((suggestion) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "address-suggestion";
+    button.setAttribute("role", "option");
+    button.textContent = suggestion.fullAddress;
+    button.addEventListener("click", () => onSelect(suggestion));
+    container.appendChild(button);
+  });
+
+  container.hidden = false;
+}
+
+function selectAddressSuggestion(form, input, container, suggestion) {
+  input.value = suggestion.fullAddress;
+  input.setAttribute("aria-expanded", "false");
+  setAddressHiddenFields(form, suggestion);
+  container.hidden = true;
+  container.innerHTML = "";
+}
+
+function updateManualAddress(form, input) {
+  const manualFields = {
+    street: form.querySelector('[data-address-field="street"]')?.value.trim() || "",
+    houseNumber: form.querySelector('[data-address-field="houseNumber"]')?.value.trim() || "",
+    postcode: form.querySelector('[data-address-field="postcode"]')?.value.trim() || "",
+    city: form.querySelector('[data-address-field="city"]')?.value.trim() || "",
+  };
+  const fullAddress = [manualFields.street, manualFields.houseNumber, manualFields.postcode, manualFields.city]
+    .filter(Boolean)
+    .join(", ");
+
+  setAddressHiddenFields(form, { ...manualFields, fullAddress });
+
+  if (fullAddress) {
+    input.value = fullAddress;
+  }
+}
+
+function initAddressAutocomplete(form) {
+  const input = form.querySelector("#event-address");
+  const container = form.querySelector("#address-suggestions");
+  const manualToggle = form.querySelector(".address-manual-toggle");
+  const manualFields = form.querySelector(".manual-address-fields");
+
+  if (!input || !container) return;
+
+  let debounceTimer;
+  let activeRequest;
+
+  function hideSuggestions() {
+    container.hidden = true;
+    input.setAttribute("aria-expanded", "false");
+  }
+
+  input.addEventListener("input", () => {
+    window.clearTimeout(debounceTimer);
+
+    const query = input.value.trim();
+    setAddressHiddenFields(form, { fullAddress: query });
+
+    if (query.length < 4) {
+      hideSuggestions();
+      container.innerHTML = "";
+      return;
+    }
+
+    debounceTimer = window.setTimeout(async () => {
+      if (activeRequest) {
+        activeRequest.abort();
+      }
+
+      activeRequest = new AbortController();
+      container.innerHTML = '<div class="address-suggestion-status">Adres zoeken...</div>';
+      container.hidden = false;
+      input.setAttribute("aria-expanded", "true");
+
+      try {
+        const suggestions = await fetchAddressSuggestions(query, activeRequest.signal);
+        renderAddressSuggestions(container, suggestions, (suggestion) => {
+          selectAddressSuggestion(form, input, container, suggestion);
+        });
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        renderAddressSuggestions(container, [], () => {});
+      }
+    }, 300);
+  });
+
+  if (manualToggle && manualFields) {
+    manualToggle.addEventListener("click", () => {
+      manualFields.hidden = false;
+      hideSuggestions();
+      const firstManualField = manualFields.querySelector("input");
+      if (firstManualField) {
+        firstManualField.focus();
+      }
+    });
+
+    manualFields.querySelectorAll("input").forEach((field) => {
+      field.addEventListener("input", () => updateManualAddress(form, input));
+    });
+  }
+
+  document.addEventListener("click", (event) => {
+    if (!input.contains(event.target) && !container.contains(event.target)) {
+      hideSuggestions();
+    }
+  });
+
+  form.addEventListener("submit", () => {
+    if (manualFields && !manualFields.hidden) {
+      updateManualAddress(form, input);
+    } else {
+      const fullAddressField = getAddressField(form, "Volledig adres evenement");
+      if (fullAddressField && !fullAddressField.value) {
+        fullAddressField.value = input.value.trim();
+      }
+    }
+  });
+}
+
 quoteButtons.forEach((button) => {
   button.addEventListener("click", (event) => {
     event.stopPropagation();
@@ -210,4 +398,5 @@ if (contactForm) {
   });
 
   updateRequestSelection();
+  initAddressAutocomplete(contactForm);
 }
