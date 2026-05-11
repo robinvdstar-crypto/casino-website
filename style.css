@@ -533,6 +533,23 @@
     appearance: none;
   }
 
+  .form-field {
+    display: grid;
+    gap: 8px;
+  }
+
+  .form-field span {
+    color: #d4af37;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+
+  .contact-form input[type="date"] {
+    color-scheme: dark;
+  }
+
   .form-dropdowns {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -626,7 +626,10 @@
         <input type="text" name="name" placeholder="Naam" required />
         <input type="text" name="phone" placeholder="Telefoonnummer" />
         <input type="email" name="email" placeholder="E-mailadres" required />
-        <input type="text" name="event_date" placeholder="Datum van het event" />
+        <label class="form-field">
+          <span>Datum evenement</span>
+          <input type="date" name="event_date" aria-label="Datum evenement" />
+        </label>
         <input type="text" name="location" placeholder="Locatie van het event" />
         <input type="number" name="guests" placeholder="Aantal gasten" min="1" />
         <select name="event_type">

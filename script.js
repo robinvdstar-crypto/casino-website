@@ -183,6 +183,12 @@ quoteButtons.forEach((button) => {
 const contactForm = document.querySelector(".contact-form");
 
 if (contactForm) {
+  const eventDateInput = contactForm.querySelector('input[type="date"][name="event_date"]');
+
+  if (eventDateInput) {
+    eventDateInput.min = new Date().toISOString().split("T")[0];
+  }
+
   contactForm
     .querySelectorAll('input[name="aanvraag_opties[]"], input[name="extras[]"]')
     .forEach((input) => {
