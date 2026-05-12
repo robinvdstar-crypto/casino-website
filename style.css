@@ -1226,7 +1226,8 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .table-media--roulette:hover .table-media__video {
+  .table-media--roulette:hover .table-media__video,
+  .table-media--blackjack:hover .table-media__video {
     opacity: 1;
   }
 }

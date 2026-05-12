@@ -77,10 +77,10 @@ tableItems.forEach((item) => {
   });
 });
 
-const rouletteHoverMedia = document.querySelectorAll(".table-media--roulette");
+const hoverVideoMedia = document.querySelectorAll(".table-media--roulette, .table-media--blackjack");
 const supportsDesktopHover = window.matchMedia("(hover: hover) and (pointer: fine)");
 
-rouletteHoverMedia.forEach((media) => {
+hoverVideoMedia.forEach((media) => {
   const video = media.querySelector("video");
 
   if (!video) return;
