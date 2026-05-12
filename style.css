@@ -515,6 +515,20 @@
     gap: 16px;
   }
 
+  .form-intro,
+  .field-note,
+  .submit-note {
+    color: #cfc3ae;
+    font-size: 14px;
+  }
+
+  .form-intro {
+    padding: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.14);
+    border-radius: 16px;
+    background: rgba(212, 175, 55, 0.045);
+  }
+
   .contact-proof-list {
     display: grid;
     gap: 12px;
@@ -638,6 +652,72 @@
 
   .manual-address-fields[hidden] {
     display: none;
+  }
+
+  .form-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .form-field-full,
+  .address-field,
+  .manual-address-fields {
+    grid-column: 1 / -1;
+  }
+
+  .form-step {
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid rgba(212, 175, 55, 0.16);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .form-step legend {
+    padding: 0 8px;
+    color: #d4af37;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+  }
+
+  .choice-grid {
+    display: grid;
+    gap: 10px;
+  }
+
+  .choice-grid-compact {
+    grid-template-columns: 1fr;
+  }
+
+  .choice-card {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid rgba(212, 175, 55, 0.14);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    color: #efe5d4;
+    cursor: pointer;
+  }
+
+  .choice-card input {
+    width: 18px;
+    height: 18px;
+    accent-color: #d4af37;
+    flex: 0 0 auto;
+  }
+
+  .choice-card:has(input:checked),
+  .checkbox-grid label:has(input:checked) {
+    border-color: rgba(212, 175, 55, 0.52);
+    background: rgba(212, 175, 55, 0.10);
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.10);
   }
 
   .form-dropdowns {
@@ -1285,6 +1365,27 @@
   cursor: pointer;
 }
 
+.checkbox-grid label small {
+  display: block;
+  margin-top: 4px;
+  color: #cfc3ae;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.checkbox-card-featured {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  border-color: rgba(212, 175, 55, 0.28);
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12), rgba(255, 255, 255, 0.025));
+}
+
+.checkbox-card-featured small {
+  flex: 1 0 100%;
+  padding-left: 28px;
+}
+
 .checkbox-grid input {
   width: 18px;
   height: 18px;
@@ -1349,6 +1450,11 @@
 .addon-card p {
   color: #cfc3ae;
   font-size: 14px;
+}
+
+.upsell-card .mini-cta {
+  width: auto;
+  white-space: nowrap;
 }
 
 .upsell-card strong {
@@ -1451,6 +1557,14 @@
 
   .form-dropdowns {
     grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .form-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .form-step {
     padding: 16px;
   }
 

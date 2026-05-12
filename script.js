@@ -99,79 +99,88 @@ rouletteHoverMedia.forEach((media) => {
 });
 
 const quoteButtons = document.querySelectorAll("[data-option]");
-const contactSection = document.getElementById("contact");
 const selectionFeedback = document.querySelector(".selection-feedback");
 const requestSummaryBar = document.querySelector(".request-summary-bar");
-const selectedOptionsTextarea = document.querySelector('textarea[name="gekozen_tafels_en_opties"]');
-const tableOptions = [
-  "Roulette tafel",
-  "Blackjack tafel",
-  "Craps tafel",
-  "Pokertafel",
-  "Rad van Fortuin",
-  "Golden Ten",
-  "Paardenrennen",
-  "Caribbean Stud",
-  "Gokkasten",
-];
+const optionAliases = {
+  "Complete casinoavond": "Complete casinoavond laten verzorgen",
+  "Decoratie": "Casino decoratie",
+  "Speeldollars met eigen logo (+€100)": "Custom speeldollars met eigen logo",
+};
 
 function getCheckedValues(selector) {
   return Array.from(document.querySelectorAll(selector + ":checked")).map((input) => input.value);
 }
 
 function findOptionInput(optionName) {
-  return Array.from(document.querySelectorAll('input[name="aanvraag_opties[]"], input[name="extras[]"]'))
-    .find((input) => input.value === optionName);
+  const normalizedOption = optionAliases[optionName] || optionName;
+
+  return Array.from(document.querySelectorAll('input[name="gewenste_tafels[]"], input[name="extras[]"]'))
+    .find((input) => input.value === normalizedOption);
+}
+
+function findIntentInput(optionName) {
+  const normalizedOption = optionAliases[optionName] || optionName;
+
+  return Array.from(document.querySelectorAll('input[name="Wat zoekt de klant ongeveer"]'))
+    .find((input) => input.value === normalizedOption);
+}
+
+function getRequestSelections() {
+  const selectedTables = getCheckedValues('input[name="gewenste_tafels[]"]');
+  const selectedExtras = getCheckedValues('input[name="extras[]"]');
+  const selectedIntent = document.querySelector('input[name="Wat zoekt de klant ongeveer"]:checked')?.value || "";
+
+  return { selectedTables, selectedExtras, selectedIntent };
 }
 
 function updateRequestSelection() {
-  const selectedOptions = getCheckedValues('input[name="aanvraag_opties[]"]');
-  const selectedExtras = getCheckedValues('input[name="extras[]"]');
-  const allSelections = [...new Set([...selectedOptions, ...selectedExtras])];
-  const selectionText = allSelections.length ? allSelections.join(", ") : "";
-  const selectedTablesField = document.querySelector('input[name="selected_tables"]');
-  const selectedExtrasField = document.querySelector('input[name="selected_extras"]');
-  const selectedRequestField = document.querySelector('input[name="selected_request"]');
+  const { selectedTables, selectedExtras, selectedIntent } = getRequestSelections();
+  const allSelections = [...new Set([...selectedTables, ...selectedExtras])];
+  const selectedTablesField = document.querySelector('input[name="Gewenste tafels"]');
+  const selectedExtrasField = document.querySelector('input[name="Extra opties"]');
+  const selectedRequestField = document.querySelector('input[name="Samenvatting aanvraag"]');
 
-  if (selectedTablesField) selectedTablesField.value = selectedOptions.join(", ");
+  if (selectedTablesField) selectedTablesField.value = selectedTables.join(", ");
   if (selectedExtrasField) selectedExtrasField.value = selectedExtras.join(", ");
-  if (selectedRequestField) selectedRequestField.value = selectionText;
-
-  if (selectedOptionsTextarea) {
-    selectedOptionsTextarea.value = selectionText;
+  if (selectedRequestField) {
+    selectedRequestField.value = [
+      selectedIntent ? `Wat zoekt de klant ongeveer: ${selectedIntent}` : "",
+      selectedTables.length ? `Gewenste tafels: ${selectedTables.join(", ")}` : "",
+      selectedExtras.length ? `Extra opties: ${selectedExtras.join(", ")}` : "",
+    ].filter(Boolean).join(" | ");
   }
 
   if (requestSummaryBar) {
-    const count = allSelections.length;
+    const count = allSelections.length + (selectedIntent ? 1 : 0);
     requestSummaryBar.hidden = count === 0;
     document.body.classList.toggle("has-request-selection", count > 0);
 
     const label = requestSummaryBar.querySelector("strong");
     if (label) {
-      label.textContent = `${count} ${count === 1 ? "optie" : "opties"}`;
+      label.textContent = allSelections.length
+        ? `${allSelections.length} ${allSelections.length === 1 ? "optie" : "opties"}`
+        : "Je aanvraag";
     }
   }
 }
 
 function selectRequestOption(optionName) {
   const checkbox = findOptionInput(optionName);
+  const intentInput = findIntentInput(optionName);
 
   if (checkbox) {
     checkbox.checked = true;
   }
 
-  const tableSelect = document.querySelector('select[name="type_tafels"]');
-  const extrasSelect = document.querySelector('select[name="overige_opties"]');
-
-  if (tableSelect && tableOptions.includes(optionName)) {
-    tableSelect.value = optionName;
-  }
-
-  if (extrasSelect && !tableOptions.includes(optionName)) {
-    extrasSelect.value = optionName;
+  if (intentInput) {
+    intentInput.checked = true;
   }
 
   updateRequestSelection();
+}
+
+function getSelectedOptionLabel(optionName) {
+  return optionAliases[optionName] || optionName;
 }
 
 function getAddressField(form, name) {
@@ -368,9 +377,10 @@ quoteButtons.forEach((button) => {
 
     const optionName = button.getAttribute("data-option");
     selectRequestOption(optionName);
+    const selectedLabel = getSelectedOptionLabel(optionName);
 
-    if (selectionFeedback && optionName) {
-      selectionFeedback.textContent = `${optionName} toegevoegd aan je aanvraag`;
+    if (selectionFeedback && selectedLabel) {
+      selectionFeedback.textContent = `${selectedLabel} toegevoegd aan je aanvraag`;
     }
 
     const originalText = button.dataset.originalText || button.textContent;
@@ -383,8 +393,9 @@ quoteButtons.forEach((button) => {
       button.classList.remove("is-added");
     }, 1600);
 
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    const summaryLink = requestSummaryBar?.querySelector("a");
+    if (summaryLink) {
+      summaryLink.textContent = "Offerte aanvragen";
     }
   });
 });
@@ -392,27 +403,17 @@ quoteButtons.forEach((button) => {
 const contactForm = document.querySelector(".contact-form");
 
 if (contactForm) {
-  const eventDateInput = contactForm.querySelector('input[type="date"][name="event_date"]');
+  const eventDateInput = contactForm.querySelector('input[type="date"]');
 
   if (eventDateInput) {
     eventDateInput.min = new Date().toISOString().split("T")[0];
   }
 
   contactForm
-    .querySelectorAll('input[name="aanvraag_opties[]"], input[name="extras[]"]')
+    .querySelectorAll('input[name="gewenste_tafels[]"], input[name="extras[]"], input[name="Wat zoekt de klant ongeveer"]')
     .forEach((input) => {
       input.addEventListener("change", updateRequestSelection);
     });
-
-  contactForm.querySelectorAll('select[name="type_tafels"], select[name="overige_opties"]').forEach((select) => {
-    select.addEventListener("change", () => {
-      if (select.value) {
-        selectRequestOption(select.value);
-      } else {
-        updateRequestSelection();
-      }
-    });
-  });
 
   contactForm.addEventListener("submit", () => {
     updateRequestSelection();
