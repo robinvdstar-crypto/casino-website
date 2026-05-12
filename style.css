@@ -1392,10 +1392,7 @@
   }
 
   .whatsapp-floating::before {
-    content: "WA";
-    font-size: 15px;
-    font-weight: 900;
-    color: #f7e8b5;
+    content: none;
   }
 
   .form-dropdowns {
@@ -1496,5 +1493,54 @@
 
   .table-content {
     padding: 0 18px 22px 18px;
+  }
+}
+
+/* Floating WhatsApp button */
+.whatsapp-floating {
+  gap: 9px;
+  min-width: 52px;
+}
+
+.whatsapp-floating::before {
+  content: none !important;
+}
+
+.whatsapp-floating-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 21px;
+  height: 21px;
+  color: #25d366;
+  filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.28));
+}
+
+.whatsapp-floating-text {
+  display: inline-block;
+}
+
+@media (max-width: 760px) {
+  .whatsapp-floating {
+    right: 14px;
+    bottom: 88px;
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+    min-height: 52px;
+    padding: 0;
+    font-size: 0;
+  }
+
+  .whatsapp-floating-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .whatsapp-floating-text {
+    display: none;
+  }
+
+  body.has-request-selection .whatsapp-floating {
+    bottom: 92px;
   }
 }
