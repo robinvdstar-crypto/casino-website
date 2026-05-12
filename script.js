@@ -77,6 +77,27 @@ tableItems.forEach((item) => {
   });
 });
 
+const rouletteHoverMedia = document.querySelectorAll(".table-media--roulette");
+const supportsDesktopHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+
+rouletteHoverMedia.forEach((media) => {
+  const video = media.querySelector("video");
+
+  if (!video) return;
+
+  media.addEventListener("mouseenter", () => {
+    if (!supportsDesktopHover.matches) return;
+
+    video.currentTime = 0;
+    video.play().catch(() => {});
+  });
+
+  media.addEventListener("mouseleave", () => {
+    video.pause();
+    video.currentTime = 0;
+  });
+});
+
 const quoteButtons = document.querySelectorAll("[data-option]");
 const contactSection = document.getElementById("contact");
 const selectionFeedback = document.querySelector(".selection-feedback");
