@@ -524,7 +524,7 @@
   </section>
 
   <section class="section contact-section" id="contact">
-    <div class="container contact-grid">
+    <div class="container contact-grid" id="offerte">
       <div class="contact-copy">
         <p class="section-label">Vrijblijvend voorstel op maat</p>
         <h2>Ontvang een passend voorstel voor jouw event</h2>
@@ -549,78 +549,80 @@
         <input type="hidden" name="Extra opties" value="">
         <input type="hidden" name="Samenvatting aanvraag" value="">
 
-        <p class="form-intro">
-          Vul kort in wat je organiseert. Je hoeft nog niet precies te weten welke tafels of extra’s je nodig hebt.
-          We denken graag mee over een passende casino-opstelling.
-        </p>
-
-        <fieldset class="form-step">
-          <legend>Wat zoek je ongeveer?</legend>
-          <div class="choice-grid choice-grid-compact">
-            <label class="choice-card">
-              <input type="radio" name="Wat zoekt de klant ongeveer" value="Losse casinotafels huren">
-              <span>Losse casinotafels huren</span>
-            </label>
-            <label class="choice-card">
-              <input type="radio" name="Wat zoekt de klant ongeveer" value="Complete casinoavond laten verzorgen">
-              <span>Complete casinoavond laten verzorgen</span>
-            </label>
-            <label class="choice-card">
-              <input type="radio" name="Wat zoekt de klant ongeveer" value="Ik weet het nog niet, adviseer mij">
-              <span>Ik weet het nog niet, adviseer mij</span>
-            </label>
-          </div>
-        </fieldset>
-
-        <fieldset class="form-step">
-          <legend>Gewenste tafels</legend>
-          <p class="form-options-intro">
-            Niet zeker welke combinatie het beste past? Geen probleem. We controleren altijd of de gekozen tafels passen bij je aantal gasten, locatie en planning.
+        <div id="offerte-keuzes">
+          <p class="form-intro">
+            Vul kort in wat je organiseert. Je hoeft nog niet precies te weten welke tafels of extra’s je nodig hebt.
+            We denken graag mee over een passende casino-opstelling.
           </p>
-          <div class="checkbox-grid">
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Roulette tafel"> Roulette tafel</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Blackjack tafel"> Blackjack tafel</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Pokertafel"> Pokertafel</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Craps tafel"> Craps tafel</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Rad van Fortuin"> Rad van Fortuin</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Golden Ten"> Golden Ten</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Paardenrennen"> Paardenrennen</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Caribbean Stud"> Caribbean Stud</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Gokkasten"> Gokkasten</label>
-            <label><input type="checkbox" name="gewenste_tafels[]" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
-          </div>
-          <p class="selection-feedback" aria-live="polite"></p>
-        </fieldset>
 
-        <fieldset class="form-step">
-          <legend>Extra’s</legend>
-          <div class="checkbox-grid">
-            <label><input type="checkbox" name="extras[]" value="Casino decoratie"> Casino decoratie</label>
-            <label><input type="checkbox" name="extras[]" value="Verlichting"> Verlichting</label>
-            <label><input type="checkbox" name="extras[]" value="Casino props"> Casino props</label>
-            <label><input type="checkbox" name="extras[]" value="Rode loper entree"> Rode loper entree</label>
-            <label><input type="checkbox" name="extras[]" value="Las Vegas decoratie"> Las Vegas decoratie</label>
-            <label><input type="checkbox" name="extras[]" value="Extra croupier"> Extra croupier</label>
-            <label><input type="checkbox" name="extras[]" value="Fotografie"> Fotografie</label>
-            <label class="checkbox-card-featured">
-              <input type="checkbox" name="extras[]" value="Custom speeldollars met eigen logo">
-              <span>Custom speeldollars met eigen logo</span>
-              <small>Populair bij bedrijfsfeesten: speeldollars met eigen logo die gasten mogen bewaren.</small>
-            </label>
-            <label><input type="checkbox" name="extras[]" value="Complete aankleding / themafeest"> Complete aankleding / themafeest</label>
-            <label><input type="checkbox" name="extras[]" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
-          </div>
-        </fieldset>
+          <fieldset class="form-step">
+            <legend>Wat zoek je ongeveer?</legend>
+            <div class="choice-grid choice-grid-compact">
+              <label class="choice-card">
+                <input type="radio" name="Wat zoekt de klant ongeveer" value="Losse casinotafels huren">
+                <span>Losse casinotafels huren</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="Wat zoekt de klant ongeveer" value="Complete casinoavond laten verzorgen">
+                <span>Complete casinoavond laten verzorgen</span>
+              </label>
+              <label class="choice-card">
+                <input type="radio" name="Wat zoekt de klant ongeveer" value="Ik weet het nog niet, adviseer mij">
+                <span>Ik weet het nog niet, adviseer mij</span>
+              </label>
+            </div>
+          </fieldset>
 
-        <div class="upsell-card">
-          <div>
-            <h3>Speeldollars met eigen logo — €100 extra</h3>
-            <p>Maak de casinoavond persoonlijk met speeldollars voorzien van jullie eigen logo. De biljetten mogen na afloop worden gehouden als aandenken.</p>
+          <fieldset class="form-step">
+            <legend>Gewenste tafels</legend>
+            <p class="form-options-intro">
+              Niet zeker welke combinatie het beste past? Geen probleem. We controleren altijd of de gekozen tafels passen bij je aantal gasten, locatie en planning.
+            </p>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Roulette tafel"> Roulette tafel</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Blackjack tafel"> Blackjack tafel</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Pokertafel"> Pokertafel</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Craps tafel"> Craps tafel</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Rad van Fortuin"> Rad van Fortuin</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Golden Ten"> Golden Ten</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Paardenrennen"> Paardenrennen</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Caribbean Stud"> Caribbean Stud</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Gokkasten"> Gokkasten</label>
+              <label><input type="checkbox" name="gewenste_tafels[]" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
+            </div>
+            <p class="selection-feedback" aria-live="polite"></p>
+          </fieldset>
+
+          <fieldset class="form-step">
+            <legend>Extra’s</legend>
+            <div class="checkbox-grid">
+              <label><input type="checkbox" name="extras[]" value="Casino decoratie"> Casino decoratie</label>
+              <label><input type="checkbox" name="extras[]" value="Verlichting"> Verlichting</label>
+              <label><input type="checkbox" name="extras[]" value="Casino props"> Casino props</label>
+              <label><input type="checkbox" name="extras[]" value="Rode loper entree"> Rode loper entree</label>
+              <label><input type="checkbox" name="extras[]" value="Las Vegas decoratie"> Las Vegas decoratie</label>
+              <label><input type="checkbox" name="extras[]" value="Extra croupier"> Extra croupier</label>
+              <label><input type="checkbox" name="extras[]" value="Fotografie"> Fotografie</label>
+              <label class="checkbox-card-featured">
+                <input type="checkbox" name="extras[]" value="Custom speeldollars met eigen logo">
+                <span>Custom speeldollars met eigen logo</span>
+                <small>Populair bij bedrijfsfeesten: speeldollars met eigen logo die gasten mogen bewaren.</small>
+              </label>
+              <label><input type="checkbox" name="extras[]" value="Complete aankleding / themafeest"> Complete aankleding / themafeest</label>
+              <label><input type="checkbox" name="extras[]" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
+            </div>
+          </fieldset>
+
+          <div class="upsell-card">
+            <div>
+              <h3>Speeldollars met eigen logo — €100 extra</h3>
+              <p>Maak de casinoavond persoonlijk met speeldollars voorzien van jullie eigen logo. De biljetten mogen na afloop worden gehouden als aandenken.</p>
+            </div>
+            <button type="button" class="mini-cta" data-option="Custom speeldollars met eigen logo">Voeg toe aan aanvraag</button>
           </div>
-          <button type="button" class="mini-cta" data-option="Custom speeldollars met eigen logo">Voeg toe aan aanvraag</button>
         </div>
 
-        <fieldset class="form-step">
+        <fieldset class="form-step" id="offerte-gegevens">
           <legend>Jouw gegevens</legend>
           <div class="form-fields">
             <label class="form-field">
@@ -737,10 +739,10 @@
 
   <div class="request-summary-bar" hidden>
     <span><strong>0 opties</strong> toegevoegd aan aanvraag</span>
-    <a href="#contact">Offerte aanvragen</a>
+    <a href="#offerte-gegevens">Verder naar gegevens</a>
   </div>
 
-  <a href="#contact" class="sticky-mobile-cta">Offerte aanvragen</a>
+  <a href="#offerte" class="sticky-mobile-cta">Offerte aanvragen</a>
 
   <script src="script.js"></script>
   <a class="whatsapp-floating" href="https://wa.me/31683449057" target="_blank" rel="noopener" aria-label="Stuur ons een WhatsApp-bericht"><svg class="whatsapp-floating-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 3.2a8.76 8.76 0 0 0-7.48 13.3L3.6 20.8l4.4-.93a8.75 8.75 0 1 0 4.04-16.67Zm0 1.56a7.2 7.2 0 1 1-3.48 13.5l-.28-.16-2.7.57.58-2.62-.18-.3a7.2 7.2 0 0 1 6.06-10.99Zm-3.02 3.7c-.16 0-.42.06-.64.31-.22.25-.84.82-.84 2 0 1.18.86 2.32.98 2.48.12.16 1.66 2.66 4.12 3.62 2.04.8 2.46.64 2.9.6.44-.04 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.47-.39-.41-.54-.42h-.46Z" fill="currentColor"/></svg><span class="whatsapp-floating-text">WhatsApp ons</span></a>

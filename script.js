@@ -101,6 +101,10 @@ hoverVideoMedia.forEach((media) => {
 const quoteButtons = document.querySelectorAll("[data-option]");
 const selectionFeedback = document.querySelector(".selection-feedback");
 const requestSummaryBar = document.querySelector(".request-summary-bar");
+const stickyMobileCta = document.querySelector(".sticky-mobile-cta");
+const offerSection = document.getElementById("offerte");
+const offerChoicesSection = document.getElementById("offerte-keuzes");
+const offerDetailsSection = document.getElementById("offerte-gegevens");
 const optionAliases = {
   "Complete casinoavond": "Complete casinoavond laten verzorgen",
   "Decoratie": "Casino decoratie",
@@ -181,6 +185,44 @@ function selectRequestOption(optionName) {
 
 function getSelectedOptionLabel(optionName) {
   return optionAliases[optionName] || optionName;
+}
+
+function setQuoteCtaTarget(target, label) {
+  if (stickyMobileCta) {
+    stickyMobileCta.setAttribute("href", target);
+    stickyMobileCta.textContent = label;
+  }
+
+  const summaryLink = requestSummaryBar?.querySelector("a");
+  if (summaryLink) {
+    summaryLink.setAttribute("href", target);
+    summaryLink.textContent = label;
+  }
+}
+
+function updateStickyQuoteFlow() {
+  if (!stickyMobileCta || !offerSection || !offerChoicesSection || !offerDetailsSection) return;
+
+  const offset = 140;
+  const choicesTop = offerChoicesSection.getBoundingClientRect().top;
+  const detailsTop = offerDetailsSection.getBoundingClientRect().top;
+  const detailsBottom = offerDetailsSection.getBoundingClientRect().bottom;
+  const detailsVisible = detailsTop < window.innerHeight * 0.72 && detailsBottom > offset;
+  const isInChoices = choicesTop <= offset || window.location.hash === "#offerte-keuzes";
+  const { selectedTables, selectedExtras, selectedIntent } = getRequestSelections();
+  const hasSelections = selectedTables.length > 0 || selectedExtras.length > 0 || Boolean(selectedIntent);
+
+  document.body.classList.toggle("at-offerte-gegevens", detailsVisible);
+
+  if (detailsVisible) {
+    return;
+  }
+
+  if (isInChoices || hasSelections) {
+    setQuoteCtaTarget("#offerte-gegevens", "Verder naar gegevens");
+  } else {
+    setQuoteCtaTarget("#offerte", "Offerte aanvragen");
+  }
 }
 
 function getAddressField(form, name) {
@@ -393,10 +435,8 @@ quoteButtons.forEach((button) => {
       button.classList.remove("is-added");
     }, 1600);
 
-    const summaryLink = requestSummaryBar?.querySelector("a");
-    if (summaryLink) {
-      summaryLink.textContent = "Offerte aanvragen";
-    }
+    setQuoteCtaTarget("#offerte-gegevens", "Verder naar gegevens");
+    updateStickyQuoteFlow();
   });
 });
 
@@ -412,7 +452,10 @@ if (contactForm) {
   contactForm
     .querySelectorAll('input[name="gewenste_tafels[]"], input[name="extras[]"], input[name="Wat zoekt de klant ongeveer"]')
     .forEach((input) => {
-      input.addEventListener("change", updateRequestSelection);
+      input.addEventListener("change", () => {
+        updateRequestSelection();
+        updateStickyQuoteFlow();
+      });
     });
 
   contactForm.addEventListener("submit", () => {
@@ -420,5 +463,10 @@ if (contactForm) {
   });
 
   updateRequestSelection();
+  updateStickyQuoteFlow();
   initAddressAutocomplete(contactForm);
 }
+
+window.addEventListener("scroll", updateStickyQuoteFlow, { passive: true });
+window.addEventListener("resize", updateStickyQuoteFlow);
+updateStickyQuoteFlow();
