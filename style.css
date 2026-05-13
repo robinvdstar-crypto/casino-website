@@ -1615,6 +1615,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 9px;
+  min-width: 52px;
   min-height: 46px;
   padding: 0 17px;
   border: 1px solid rgba(212, 175, 55, 0.46);
@@ -1634,6 +1636,23 @@
   border-color: rgba(212, 175, 55, 0.85);
   color: #ffffff;
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.42), 0 0 0 3px rgba(212, 175, 55, 0.16);
+}
+
+.whatsapp-floating::before {
+  content: none !important;
+}
+
+.whatsapp-floating-icon {
+  display: block;
+  flex: 0 0 auto;
+  width: 21px;
+  height: 21px;
+  color: #25d366;
+  filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.28));
+}
+
+.whatsapp-floating-text {
+  display: inline-block;
 }
 
 .request-summary-bar {
@@ -1688,15 +1707,22 @@
 
   .whatsapp-floating {
     right: 14px;
-    bottom: 82px;
-    min-width: 48px;
-    min-height: 48px;
-    padding: 0 12px;
+    bottom: 88px;
+    width: 52px;
+    min-width: 52px;
+    height: 52px;
+    min-height: 52px;
+    padding: 0;
     font-size: 0;
   }
 
-  .whatsapp-floating::before {
-    content: none;
+  .whatsapp-floating-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .whatsapp-floating-text {
+    display: none;
   }
 
   .form-dropdowns {
@@ -1792,7 +1818,7 @@
   }
 
   body.has-request-selection .whatsapp-floating {
-    bottom: 88px;
+    bottom: 92px;
   }
 
   body.at-offerte-gegevens .whatsapp-floating {
@@ -1821,58 +1847,5 @@
 
   .table-content {
     padding: 0 18px 22px 18px;
-  }
-}
-
-/* Floating WhatsApp button */
-.whatsapp-floating {
-  gap: 9px;
-  min-width: 52px;
-}
-
-.whatsapp-floating::before {
-  content: none !important;
-}
-
-.whatsapp-floating-icon {
-  display: block;
-  flex: 0 0 auto;
-  width: 21px;
-  height: 21px;
-  color: #25d366;
-  filter: drop-shadow(0 2px 7px rgba(0, 0, 0, 0.28));
-}
-
-.whatsapp-floating-text {
-  display: inline-block;
-}
-
-@media (max-width: 760px) {
-  .whatsapp-floating {
-    right: 14px;
-    bottom: 88px;
-    width: 52px;
-    min-width: 52px;
-    height: 52px;
-    min-height: 52px;
-    padding: 0;
-    font-size: 0;
-  }
-
-  .whatsapp-floating-icon {
-    width: 24px;
-    height: 24px;
-  }
-
-  .whatsapp-floating-text {
-    display: none;
-  }
-
-  body.has-request-selection .whatsapp-floating {
-    bottom: 92px;
-  }
-
-  body.at-offerte-gegevens .whatsapp-floating {
-    bottom: 14px;
   }
 }
