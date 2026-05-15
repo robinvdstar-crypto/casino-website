@@ -108,6 +108,10 @@ const offerDetailsSection = document.getElementById("offerte-gegevens");
 const optionAliases = {
   "Complete casinoavond": "Complete casinoavond laten verzorgen",
   "Decoratie": "Casino decoratie",
+  "Casino props": "Casino decoratie",
+  "Rode loper entree": "Casino decoratie",
+  "Las Vegas decoratie": "Complete aankleding / themafeest",
+  "Fotografie": "Fotografie / fotospiegel",
   "Speeldollars met eigen logo (+€100)": "Custom speeldollars met eigen logo",
 };
 
@@ -118,7 +122,7 @@ function getCheckedValues(selector) {
 function findOptionInput(optionName) {
   const normalizedOption = optionAliases[optionName] || optionName;
 
-  return Array.from(document.querySelectorAll('input[name="gewenste_tafels[]"], input[name="extras[]"]'))
+  return Array.from(document.querySelectorAll('input[data-request-group="tables"], input[data-request-group="extras"]'))
     .find((input) => input.value === normalizedOption);
 }
 
@@ -130,8 +134,8 @@ function findIntentInput(optionName) {
 }
 
 function getRequestSelections() {
-  const selectedTables = getCheckedValues('input[name="gewenste_tafels[]"]');
-  const selectedExtras = getCheckedValues('input[name="extras[]"]');
+  const selectedTables = getCheckedValues('input[data-request-group="tables"]');
+  const selectedExtras = getCheckedValues('input[data-request-group="extras"]');
   const selectedIntent = document.querySelector('input[name="Wat zoekt de klant ongeveer"]:checked')?.value || "";
 
   return { selectedTables, selectedExtras, selectedIntent };
@@ -223,6 +227,14 @@ function updateStickyQuoteFlow() {
   } else {
     setQuoteCtaTarget("#offerte", "Offerte aanvragen");
   }
+}
+
+function getLocalDateValue(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
 }
 
 function getAddressField(form, name) {
@@ -446,11 +458,11 @@ if (contactForm) {
   const eventDateInput = contactForm.querySelector('input[type="date"]');
 
   if (eventDateInput) {
-    eventDateInput.min = new Date().toISOString().split("T")[0];
+    eventDateInput.min = getLocalDateValue();
   }
 
   contactForm
-    .querySelectorAll('input[name="gewenste_tafels[]"], input[name="extras[]"], input[name="Wat zoekt de klant ongeveer"]')
+    .querySelectorAll('input[data-request-group="tables"], input[data-request-group="extras"], input[name="Wat zoekt de klant ongeveer"]')
     .forEach((input) => {
       input.addEventListener("change", () => {
         updateRequestSelection();

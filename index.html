@@ -626,37 +626,37 @@
               Niet zeker welke combinatie het beste past? Geen probleem. We controleren altijd of de gekozen tafels passen bij je aantal gasten, locatie en planning.
             </p>
             <div class="checkbox-grid">
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Roulette tafel"> Roulette tafel</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Blackjack tafel"> Blackjack tafel</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Pokertafel"> Pokertafel</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Craps tafel"> Craps tafel</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Rad van Fortuin"> Rad van Fortuin</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Golden Ten"> Golden Ten</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Paardenrennen"> Paardenrennen</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Caribbean Stud"> Caribbean Stud</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Gokkasten"> Gokkasten</label>
-              <label><input type="checkbox" name="gewenste_tafels[]" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
+              <label><input type="checkbox" data-request-group="tables" value="Roulette tafel"> Roulette tafel</label>
+              <label><input type="checkbox" data-request-group="tables" value="Blackjack tafel"> Blackjack tafel</label>
+              <label><input type="checkbox" data-request-group="tables" value="Pokertafel"> Pokertafel</label>
+              <label><input type="checkbox" data-request-group="tables" value="Craps tafel"> Craps tafel</label>
+              <label><input type="checkbox" data-request-group="tables" value="Rad van Fortuin"> Rad van Fortuin</label>
+              <label><input type="checkbox" data-request-group="tables" value="Golden Ten"> Golden Ten</label>
+              <label><input type="checkbox" data-request-group="tables" value="Paardenrennen"> Paardenrennen</label>
+              <label><input type="checkbox" data-request-group="tables" value="Caribbean Stud"> Caribbean Stud</label>
+              <label><input type="checkbox" data-request-group="tables" value="Gokkasten"> Gokkasten</label>
+              <label><input type="checkbox" data-request-group="tables" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
             </div>
             <p class="selection-feedback" aria-live="polite"></p>
           </fieldset>
 
           <fieldset class="form-step">
             <legend>Extra’s</legend>
+            <p class="form-options-intro">
+              Kies gerust alleen wat interessant klinkt. We adviseren altijd of de extra’s passen bij je locatie, planning en budget.
+            </p>
             <div class="checkbox-grid">
-              <label><input type="checkbox" name="extras[]" value="Casino decoratie"> Casino decoratie</label>
-              <label><input type="checkbox" name="extras[]" value="Verlichting"> Verlichting</label>
-              <label><input type="checkbox" name="extras[]" value="Casino props"> Casino props</label>
-              <label><input type="checkbox" name="extras[]" value="Rode loper entree"> Rode loper entree</label>
-              <label><input type="checkbox" name="extras[]" value="Las Vegas decoratie"> Las Vegas decoratie</label>
-              <label><input type="checkbox" name="extras[]" value="Extra croupier"> Extra croupier</label>
-              <label><input type="checkbox" name="extras[]" value="Fotografie"> Fotografie</label>
+              <label><input type="checkbox" data-request-group="extras" value="Casino decoratie"> Casino decoratie</label>
+              <label><input type="checkbox" data-request-group="extras" value="Verlichting"> Verlichting</label>
+              <label><input type="checkbox" data-request-group="extras" value="Extra croupier"> Extra croupier</label>
+              <label><input type="checkbox" data-request-group="extras" value="Fotografie / fotospiegel"> Fotografie / fotospiegel</label>
               <label class="checkbox-card-featured">
-                <input type="checkbox" name="extras[]" value="Custom speeldollars met eigen logo">
+                <input type="checkbox" data-request-group="extras" value="Custom speeldollars met eigen logo">
                 <span>Custom speeldollars met eigen logo</span>
-                <small>Populair bij bedrijfsfeesten: speeldollars met eigen logo die gasten mogen bewaren.</small>
+                <small>Populair bij bedrijfsfeesten: speeldollars met eigen logo. Een leuk detail dat gasten na afloop kunnen bewaren.</small>
               </label>
-              <label><input type="checkbox" name="extras[]" value="Complete aankleding / themafeest"> Complete aankleding / themafeest</label>
-              <label><input type="checkbox" name="extras[]" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
+              <label><input type="checkbox" data-request-group="extras" value="Complete aankleding / themafeest"> Complete aankleding / themafeest</label>
+              <label><input type="checkbox" data-request-group="extras" value="Ik weet het nog niet, adviseer mij"> Ik weet het nog niet, adviseer mij</label>
             </div>
           </fieldset>
 
@@ -671,6 +671,7 @@
 
         <fieldset class="form-step" id="offerte-gegevens">
           <legend>Jouw gegevens</legend>
+          <p class="form-options-intro">Laat je gegevens achter, dan ontvang je een vrijblijvend voorstel op maat.</p>
           <div class="form-fields">
             <label class="form-field">
               <span>Naam</span>
@@ -687,6 +688,7 @@
             <label class="form-field">
               <span>Datum evenement</span>
               <input type="date" name="Datum evenement" aria-label="Datum evenement" />
+              <small class="field-note">Nog niet bekend? Laat dit veld leeg en vermeld het bij opmerkingen.</small>
             </label>
             <div class="form-field address-field">
               <label for="event-address">Locatie evenement</label>
