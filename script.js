@@ -22,22 +22,31 @@ const hamburger = document.getElementById("hamburger");
 const mobileMenu = document.getElementById("mobile-menu");
 
 if (hamburger && mobileMenu) {
+  hamburger.setAttribute("type", "button");
+  hamburger.setAttribute("aria-controls", "mobile-menu");
+  hamburger.setAttribute("aria-expanded", "false");
+
+  function closeMobileMenu() {
+    mobileMenu.classList.remove("open");
+    hamburger.classList.remove("open");
+    hamburger.setAttribute("aria-expanded", "false");
+  }
+
   hamburger.addEventListener("click", () => {
-    mobileMenu.classList.toggle("open");
-    hamburger.classList.toggle("open");
+    const isOpen = mobileMenu.classList.toggle("open");
+    hamburger.classList.toggle("open", isOpen);
+    hamburger.setAttribute("aria-expanded", String(isOpen));
   });
 
   mobileMenu.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-      hamburger.classList.remove("open");
+      closeMobileMenu();
     });
   });
 
   mobileMenu.addEventListener("click", (event) => {
     if (event.target === mobileMenu) {
-      mobileMenu.classList.remove("open");
-      hamburger.classList.remove("open");
+      closeMobileMenu();
     }
   });
 
@@ -46,8 +55,7 @@ if (hamburger && mobileMenu) {
     const clickOnHamburger = hamburger.contains(event.target);
 
     if (!clickInsideMenu && !clickOnHamburger) {
-      mobileMenu.classList.remove("open");
-      hamburger.classList.remove("open");
+      closeMobileMenu();
     }
   });
 }
@@ -112,6 +120,11 @@ const optionAliases = {
   "Rode loper entree": "Casino decoratie",
   "Las Vegas decoratie": "Complete aankleding / themafeest",
   "Fotografie": "Fotografie / fotospiegel",
+  "Fotospiegel": "Fotografie / fotospiegel",
+  "Magische fotospiegel": "Fotografie / fotospiegel",
+  "Photo booth": "Fotografie / fotospiegel",
+  "Casino verlichting": "Verlichting",
+  "Speeldollars met eigen logo": "Custom speeldollars met eigen logo",
   "Speeldollars met eigen logo (+€100)": "Custom speeldollars met eigen logo",
 };
 
@@ -185,6 +198,19 @@ function selectRequestOption(optionName) {
   }
 
   updateRequestSelection();
+}
+
+function applyRequestParams() {
+  const params = new URLSearchParams(window.location.search);
+  const tableParams = [...params.getAll("tafel"), ...params.getAll("tafels"), ...params.getAll("table")];
+  const extraParams = [...params.getAll("optie"), ...params.getAll("extra"), ...params.getAll("extras"), ...params.getAll("option")];
+  const packageParams = [...params.getAll("pakket"), ...params.getAll("package")];
+  const selectedParams = [...tableParams, ...extraParams, ...packageParams]
+    .flatMap((value) => value.split(","))
+    .map((value) => value.trim())
+    .filter(Boolean);
+
+  selectedParams.forEach(selectRequestOption);
 }
 
 function getSelectedOptionLabel(optionName) {
@@ -475,6 +501,7 @@ if (contactForm) {
   });
 
   updateRequestSelection();
+  applyRequestParams();
   updateStickyQuoteFlow();
   initAddressAutocomplete(contactForm);
 }
