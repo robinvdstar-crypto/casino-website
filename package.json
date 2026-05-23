@@ -1,6 +1,6 @@
 {
   "scripts": {
     "build": "bash scripts/build-public.sh",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && npx wrangler deploy"
   }
 }
