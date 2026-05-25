@@ -1182,9 +1182,38 @@
     .hero-content {
       padding-top: 90px;
     }
+
+    .hero h1 {
+      font-size: clamp(34px, 10vw, 48px);
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
   
     .hero-text {
       font-size: 18px;
+    }
+
+    .section h2,
+    .blog-article__content h2 {
+      font-size: clamp(26px, 8vw, 34px);
+      line-height: 1.16;
+    }
+
+    .option-card h3 {
+      font-size: clamp(22px, 7vw, 26px);
+      line-height: 1.18;
+    }
+
+    .card h3,
+    .extra-card h3 {
+      font-size: clamp(20px, 6vw, 22px);
+      line-height: 1.22;
+    }
+
+    .visual-card h3,
+    .location-decor-card h3,
+    .faq-item h3 {
+      line-height: 1.24;
     }
 
     .brand-logo {
@@ -1905,7 +1934,8 @@
   }
 
   .table-summary h3 {
-    font-size: 19px;
+    font-size: clamp(18px, 5vw, 20px);
+    line-height: 1.18;
   }
 
   .table-summary p {
@@ -1973,6 +2003,16 @@
 }
 
 @media (max-width: 560px) {
+  .hero h1 {
+    font-size: clamp(31px, 9vw, 40px);
+    line-height: 1.1;
+  }
+
+  .section h2,
+  .blog-article__content h2 {
+    font-size: clamp(24px, 7vw, 30px);
+  }
+
   .upsell-card,
   .addon-card {
     flex-direction: column;
