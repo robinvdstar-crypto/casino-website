@@ -43,6 +43,30 @@
     object-position: center;
     pointer-events: none;
   }
+
+  .hero-video-brand {
+    position: absolute;
+    right: 24px;
+    bottom: 78px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(118px, 11vw, 168px);
+    padding: 8px 12px;
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    border-radius: 14px;
+    background: rgba(6, 7, 10, 0.76);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.34);
+    pointer-events: none;
+  }
+
+  .hero-video-brand img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35)) brightness(1.08);
+  }
   
   .hero::before {
     content: "";
@@ -1168,6 +1192,10 @@
   
   @media (max-width: 760px) {
     .hero-bg-video {
+      display: none;
+    }
+
+    .hero-video-brand {
       display: none;
     }
 
