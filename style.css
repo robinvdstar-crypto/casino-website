@@ -1605,6 +1605,13 @@
   transform: translateY(-2px);
 }
 
+.table-content .mini-cta + .text-link {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
 .mini-cta.is-added {
   background: #f0d575;
   color: #0f0f12;
@@ -1956,7 +1963,21 @@
   }
 
   .table-content {
-    padding: 0 18px 22px 124px;
+    padding: 0 18px 30px 124px;
+  }
+
+  .table-content .mini-cta,
+  .table-content .mini-cta + .text-link {
+    width: fit-content;
+    max-width: 100%;
+  }
+
+  .table-content .mini-cta + .text-link {
+    display: flex;
+    margin-left: 0;
+    margin-top: 12px;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
   }
 
   .checkbox-grid {
@@ -2037,6 +2058,16 @@
   }
 
   .table-content {
-    padding: 0 18px 22px 18px;
+    padding: 0 18px 34px 18px;
+  }
+
+  .table-content .mini-cta {
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .table-content .mini-cta + .text-link {
+    margin-top: 14px;
   }
 }
