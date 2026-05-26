@@ -214,6 +214,10 @@
   object-fit: cover;
 }
 
+.product-hero-image img[src$="paardenrennen-nieuw.png"] {
+  object-position: 42% center;
+}
+
 .product-trust,
 .contact-trust {
   color: #c6b895;
@@ -1498,6 +1502,10 @@
   border-radius: 14px;
   border: 1px solid rgba(212, 175, 55, 0.18);
   background: #111;
+}
+
+.table-summary > img[src$="paardenrennen-nieuw.png"] {
+  object-position: 42% center;
 }
 
 .table-media {
