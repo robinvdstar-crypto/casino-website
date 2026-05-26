@@ -184,6 +184,23 @@
   min-height: auto;
 }
 
+.product-hero::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: min(46vw, 620px);
+  height: min(46vh, 460px);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 100% 100%,
+      rgba(6, 7, 10, 0.88) 0%,
+      rgba(6, 7, 10, 0.70) 34%,
+      rgba(6, 7, 10, 0.30) 68%,
+      rgba(6, 7, 10, 0) 100%);
+}
+
 .product-hero-grid {
   position: relative;
   z-index: 2;
@@ -1246,6 +1263,11 @@
     .product-hero-grid {
       gap: 30px;
       padding-top: 75px;
+    }
+
+    .product-hero::after {
+      width: 82vw;
+      height: 42vh;
     }
 
     .product-hero-image img {
