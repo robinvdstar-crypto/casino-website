@@ -627,6 +627,8 @@ async function submitQuoteForm(form) {
       throw new Error("Web3Forms bevestigde de verzending niet.");
     }
 
+    // Success is confirmed above. Never let an Analytics failure affect the request.
+    try { await window.SitePrivacy?.lead(form); } catch (_) {}
     status.className = "form-status is-success";
     status.setAttribute("role", "status");
     status.textContent = "Aanvraag ontvangen. Je wordt doorgestuurd naar de bedankpagina.";

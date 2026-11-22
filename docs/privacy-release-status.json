@@ -1,0 +1,38 @@
+{
+  "ready": true,
+  "technical_review": "Step 61: 4 focused real-Google-tag browser groups passed, including long redirect/reload and withdrawal observation; prior full step-59 suite retained.",
+  "confirmed": {
+    "measurement_id": "G-493575CQY1",
+    "property_id": 538342555,
+    "user_provided_data_capabilities_disabled_by_owner": true,
+    "controller": "Rigid Smoke VOF",
+    "contact": "robin@jazzbandboeken.nl",
+    "unbooked_inquiry_retention_months": 24,
+    "automatic_inquiry_deletion": false,
+    "ga4_retention": {
+      "event_data_months": 2,
+      "user_data_months": 14,
+      "reset_on_new_user_activity": true,
+      "confirmation": "Owner inspected settings; unchanged"
+    },
+    "form_service": "Web3Forms",
+    "own_backend_for_forms": false,
+    "live_keys_match_release": true,
+    "personal_dashboard_named_casino_integrations": {
+      "Google Sheets": false,
+      "Telegram": false,
+      "Slack": false,
+      "Discord": false,
+      "Webhook": false
+    },
+    "historical_setup_account": "Persoonlijk account van beheerder, bevestigd door eigenaar; geen afzonderlijke zakelijke accounts afgeleid",
+    "additional_web3forms_integrations_configured": false
+  },
+  "owner_confirmation_required": [],
+  "publication_blocked": null,
+  "lead_network_validation_passed": true,
+  "live_google_receipt_validated": false,
+  "publication_requires_separate_owner_approval": false,
+  "review_basis": "Owner confirms no additional Web3Forms integrations have ever been configured; Jazz key administration location remains an operational attention point, not an inferred data recipient.",
+  "publication_approved": "Explicit owner approval step 62"
+}
